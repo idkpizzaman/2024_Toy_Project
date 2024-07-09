@@ -36,7 +36,7 @@
                     </tr>
                     <tr>
                         <th>전화번호</th>
-                        <td>${member.cellphoneNum }</td>
+                        <td>${member.phoneNum }</td>
                     </tr>
                     <tr>
                         <th>이메일</th>

@@ -10,7 +10,7 @@
         const memberModifyForm_onSubmit = function(form) {
             form.name.value = form.name.value.trim();
             form.nickname.value = form.nickname.value.trim();
-            form.cellphoneNum.value = form.cellphoneNum.value.trim();
+            form.phoneNum.value = form.phoneNum.value.trim();
             form.email.value = form.email.value.trim();
             
             if (form.name.value.length == 0) {
@@ -25,9 +25,9 @@
                 return;
             }
             
-            if (form.cellphoneNum.value.length == 0) {
+            if (form.phoneNum.value.length == 0) {
                 alert('전화번호를 입력해주세요');
-                form.cellphoneNum.focus();
+                form.phoneNum.focus();
                 return;
             }
             
@@ -72,7 +72,7 @@
                         </tr>
                         <tr>
                             <th>전화번호</th>
-                            <td><input class="input input-bordered w-full" type="text" name="cellphoneNum" value="${member.cellphoneNum }"/></td>
+                            <td><input class="input input-bordered w-full" type="text" name="cellphoneNum" value="${member.phoneNum }"/></td>
                         </tr>
                         <tr>
                             <th>이메일</th>

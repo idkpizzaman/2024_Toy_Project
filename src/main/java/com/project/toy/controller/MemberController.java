@@ -22,12 +22,12 @@ public class MemberController {
 		this.rq = rq;
 	}
 	
-	@GetMapping("/usr/member/join")
+	@GetMapping("/page/member/join")
 	public String join() {
-		return "usr/member/join";
+		return "page/member/join";
 	}
 	
-	@GetMapping("/usr/member/loginIdDupChk")
+	@GetMapping("/page/member/loginIdDupChk")
 	@ResponseBody
 	public ResultData<Member> loginIdDupChk(String loginId) {
 		Member member = memberService.getMemberByLoginId(loginId);
@@ -39,21 +39,21 @@ public class MemberController {
 		return ResultData.from("S-1", String.format("[ %s ] 은(는) 사용가능한 아이디입니다", loginId));
 	}
 	
-	@PostMapping("/usr/member/doJoin")
+	@PostMapping("/page/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email) {
+	public String doJoin(String loginId, String loginPw, String name, String nickname, String phoneNum, String email) {
 
-		memberService.joinMember(loginId, loginPw, name, nickname, cellphoneNum, email);
+		memberService.joinMember(loginId, loginPw, name, nickname, phoneNum, email);
 		
 		return Util.jsReplace(String.format("%s님이 가입되었습니다", nickname), "/");
 	}
 
-	@GetMapping("/usr/member/login")
+	@GetMapping("/page/member/login")
 	public String login() {
-		return "usr/member/login";
+		return "page/member/login";
 	}
 	
-	@PostMapping("/usr/member/doLogin")
+	@PostMapping("/page/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw) {
 		Member member = memberService.getMemberByLoginId(loginId);
@@ -71,7 +71,7 @@ public class MemberController {
 		return Util.jsReplace(String.format("[%s]님 환영합니다!", member.getNickname()), "/");
 	}
 	
-	@GetMapping("/usr/member/doLogout")
+	@GetMapping("/page/member/doLogout")
 	@ResponseBody
 	public String doLogout() {
 		rq.logout();
@@ -79,7 +79,7 @@ public class MemberController {
 		return Util.jsReplace("정상적으로 로그아웃 되었습니다.", "/");
 	}
 	
-	@GetMapping("/usr/member/getNickname")
+	@GetMapping("/page/member/getNickname")
 	@ResponseBody
 	public String getNickname() {
 		Member member = memberService.getMemberById(rq.getLoginedMemberId());
@@ -91,37 +91,37 @@ public class MemberController {
 		return member.getNickname();
 	}
 	
-	@GetMapping("/usr/member/myPage")
+	@GetMapping("/page/member/myPage")
 	public String myPage(Model model) {
 		Member member = memberService.getMemberById(rq.getLoginedMemberId());
 		
 		model.addAttribute("member", member);
 		
-		return "usr/member/myPage";
+		return "page/member/myPage";
 	}
 	
-	@GetMapping("/usr/member/checkPassword")
+	@GetMapping("/page/member/checkPassword")
 	public String checkPassword(Model model, String loginId) {
 		model.addAttribute("loginId", loginId);
 		
-		return "usr/member/checkPassword";
+		return "page/member/checkPassword";
 	}
 	
-	@GetMapping("/usr/member/passwordModify")
+	@GetMapping("/page/member/passwordModify")
 	public String passwordModify() {
-		return "usr/member/passwordModify";
+		return "page/member/passwordModify";
 	}
 	
-	@PostMapping("/usr/member/doCheckPassword")
+	@PostMapping("/page/member/doCheckPassword")
 	public String doCheckPassword(Model model, String loginPw) {
 		Member member = memberService.getMemberById(rq.getLoginedMemberId());
 		
 		model.addAttribute("member", member);
 		
-		return "usr/member/modify";
+		return "page/member/modify";
 	}
 	
-	@GetMapping("/usr/member/getMemberById")
+	@GetMapping("/page/member/getMemberById")
 	@ResponseBody
 	public ResultData<Member> getMemberById() {
 
@@ -130,18 +130,18 @@ public class MemberController {
 		return ResultData.from("S-1", "회원 조회 성공", member);
 	}
 	
-	@PostMapping("/usr/member/doModify")
+	@PostMapping("/page/member/doModify")
 	@ResponseBody
-	public String doModify(String name, String nickname, String cellphoneNum, String email) {
+	public String doModify(String name, String nickname, String phoneNum, String email) {
 
-		memberService.memberModify(rq.getLoginedMemberId(), name, nickname, cellphoneNum, email);
+		memberService.memberModify(rq.getLoginedMemberId(), name, nickname, phoneNum, email);
 
 		Member member = memberService.getMemberById(rq.getLoginedMemberId());
 
 		return Util.jsReplace(String.format("%s님의 회원정보가 수정되었습니다", member.getLoginId()), "myPage");
 	}
 	
-	@PostMapping("/usr/member/doPasswordModify")
+	@PostMapping("/page/member/doPasswordModify")
 	@ResponseBody
 	public String doPasswordModify(String loginPw) {
 

@@ -37,7 +37,7 @@
             </a>
         </div>
         <div class="grow"></div>
-        <ul class="flex mr-10">
+        <ul class="flex mr-10 ">
             <c:if test='${rq.getLoginedMemberId() == 0 }'>
                 <li class="hover:underline"><a
                     class="h-full px-3 flex items-center" href="/page/member/login"><span>로그인</span></a></li>

@@ -15,7 +15,7 @@ html > body, .ProseMirror > div, .toastui-editor-contents > div {
 }
 
 .ProseMirror > div, .toastui-editor-contents > div {
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 html>body {
